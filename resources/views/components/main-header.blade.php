@@ -9,12 +9,20 @@
             <span class="ml-3 text-xl">{{ config('app.name', 'Laravel') }}</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900">First Link</a>
-            <a class="mr-5 hover:text-gray-900">Second Link</a>
-            <a class="mr-5 hover:text-gray-900">Third Link</a>
-            <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+            <a class="mr-5 hover:text-gray-900">Home</a>
+            <a class="mr-5 hover:text-gray-900">All ads</a>
+            <a class="mr-5 hover:text-gray-900">Stores</a>
+            <a class="mr-5 hover:text-gray-900">Contact</a>
+            @guest
+            <a class="mr-5 hover:text-gray-900">Log In</a>
+            <a class="mr-5 hover:text-gray-900">Register</a>
+            @endguest
+            @auth
+            <a class="mr-5 hover:text-gray-900">{{ auth()->user()->name }}</a>
+            @endauth
         </nav>
-        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
+        <button class="inline-flex items-center bg-green-500 border-0 py-1 px-3 focus:outline-none hover:bg-green-200 rounded text-base text-gray-500 font-semibold mt-4 md:mt-0">
+            Post New Ad
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                  class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>

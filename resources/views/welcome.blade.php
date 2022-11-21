@@ -7,6 +7,7 @@
     </section>
     <section>
         <x-main-categories />
+        <x-main-featured />
     </section>
     <x-main-footer />
 </x-main-layout>
