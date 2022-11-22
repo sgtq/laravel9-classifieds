@@ -9,13 +9,16 @@ class SubCategory extends Model
 {
     use HasFactory;
 
-    public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null)
-    {
-        //
-    }
+    protected $fillable = [
+        'category_id',
+        'name',
+        'slug',
+        'description',
+        'image',
+    ];
 
     public function category()
     {
-        $this->belongsTo('category');
+        return $this->belongsTo(Category::class);
     }
 }

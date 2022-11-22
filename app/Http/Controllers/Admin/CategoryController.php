@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('categories');
+            $path = $request->file('image')->store('public/categories');
 
             Category::create([
                 'name' => $request->name,
@@ -49,10 +49,11 @@ class CategoryController extends Controller
                 'image' => $path,
             ]);
 
-            return redirect()->route('categories.index');
+            return redirect()->route('categories.index')->with('success', 'Category created');
         }
 
-        return back()->with('Please select a file');
+        $this->banner('warning', 'Please select a file');
+        return back()->with('warning', 'Please select a file');
     }
 
     /**
@@ -74,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -86,7 +87,26 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        if ($request->hasFile('image')) {
+            Storage::delete($category->image);
+            $path = $request->file('image')->store('public/categories');
+
+            $category->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'description' => $request->description,
+                'image' => $path,
+            ]);
+        } else {
+            $category->update([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'description' => $request->description
+            ]);
+        }
+
+        $this->banner('success', 'Category updated successfully');
+        return redirect()->route('categories.index')->with('success', 'Category updated');
     }
 
     /**
@@ -97,6 +117,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('success', 'Category deleted');
     }
 }

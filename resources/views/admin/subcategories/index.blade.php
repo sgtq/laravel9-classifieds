@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Categories') }}
+            {{ __('Subcategories') }}
         </h2>
     </x-slot>
 
@@ -15,9 +15,10 @@
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                     <div class="flex justify-end">
-                        <a href="{{ route('categories.create') }}"
-                           class="py-2 px-4 m-2 bg-green-500 hover:bg-green-300 text-gray-50 rounded-md">New
-                            Category</a>
+                        <a href="{{ route('subcategories.create') }}"
+                           class="py-2 px-4 m-2 bg-green-500 hover:bg-green-300 text-gray-50 rounded-md">
+                            New SubCategory
+                        </a>
                     </div>
                 </div>
             </div>
@@ -27,6 +28,10 @@
                         <table class="w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                             <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Category
+                                </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Name
@@ -44,45 +49,48 @@
                                     Image
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                    <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($categories as $category)
+                                @foreach ($subCategories as $subCategory)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            {{ $category->name }}
+                                            {{ $subCategory->category->name }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            {{ $category->slug }}
+                                            {{ $subCategory->name }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            {{ $category->description }}
+                                            {{ $subCategory->slug }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            {{ $subCategory->description }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <img class="h-12 w-12 rounded-md"
-                                                 src="{{ Storage::url($category->image) }}">
+                                                 src="{{ Storage::url($subCategory->image) }}">
                                         </div>
                                     </td>
                                     <td class="flex px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{ route('admin.add_sub', $category->id) }}"
-                                           class="text-indigo-600 hover:text-indigo-900 px-2">Add SubCategory</a>
-                                        <a href="{{ route('categories.edit', $category->id) }}"
+                                        <a href="{{ route('subcategories.edit', $subCategory->id) }}"
                                            class="text-indigo-600 hover:text-indigo-900 px-2">Edit</a>
                                         <form method="POST"
-                                              action="{{ route('admin.categories.destroy', $category->id) }}">
+                                              action="{{ route('subcategories.destroy', $subCategory->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <a class="text-red-500 hover:text-red-900 px-2"
-                                               href="{{ route('categories.destroy', $category->id) }}"
+                                               href="{{ route('subcategories.destroy', $subCategory->id) }}"
                                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                 Delete
@@ -94,7 +102,7 @@
                             </tbody>
                         </table>
                         <div class="p-2 m-2">
-                            {{ $categories->links() }}
+                            {{ $subCategories->links() }}
                         </div>
                     </div>
                 </div>

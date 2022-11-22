@@ -18,11 +18,6 @@ class Category extends Model
 
     public function sub_categories()
     {
-        $this->hasMany('sub_categories');
-    }
-
-    public function ads()
-    {
-        $this->hasMany('ads');
+        return $this->hasMany(SubCategory::class);
     }
 }

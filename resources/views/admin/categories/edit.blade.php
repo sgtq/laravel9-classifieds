@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST"
+                            <form action="{{ route('categories.update', $category->id) }}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -61,7 +61,7 @@
                                                 Image
                                             </label>
                                             <div class="w-full m-2 p-2">
-                                                <img class="h-32 w-32"
+                                                <img class="h-32 w-32" style="width:32px;"
                                                      src="{{ Storage::url($category->image) }}">
                                             </div>
                                             <div class="mt-1 flex items-center">
