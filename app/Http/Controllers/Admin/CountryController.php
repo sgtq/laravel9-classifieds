@@ -39,14 +39,13 @@ class CountryController extends Controller
     public function store(CountryStoreRequest $request)
     {
         $validated = $request->validated();
-        if (Country::create($validated)) {
-            return redirect()->route('countries.index')
+        if ($country = Country::create($validated)) {
+            return redirect()->route('countries.edit', $country->id)
                 ->with('message', 'Country created');
         }
 
         return back()
             ->with('message', 'An error ocurred when creating Country');
-
     }
 
     /**
@@ -63,12 +62,19 @@ class CountryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CountryStoreRequest  $request
      * @param  Country $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(CountryStoreRequest $request, Country $country)
     {
+        if ($country->update($request->validated())) {
+            return back()
+                ->with('message', 'Country updated');
+        }
+
+        return back()
+            ->with('message', 'An error ocurred when creating Country');
     }
 
     /**
