@@ -16,7 +16,7 @@ class Category extends Model
         'description'
     ];
 
-    public function sub_categories()
+    public function subCategories()
     {
         return $this->hasMany(SubCategory::class);
     }

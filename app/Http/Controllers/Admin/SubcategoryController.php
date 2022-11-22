@@ -55,7 +55,6 @@ class SubcategoryController extends Controller
             return redirect()->route('subcategories.index')->with('success', 'Subcategory created');
         }
 
-        $this->banner('warning', 'Please select a file.');
         return back()->with('warning', 'Please select a file');
     }
 
