@@ -33,3 +33,6 @@ Route::middleware([
 Route::resource('categories', CategoryController::class);
 Route::resource('subcategories', SubCategoryController::class);
 Route::resource('childcategories', ChildCategoryController::class);
+Route::resource('countries', \App\Http\Controllers\Admin\CountryController::class);
+Route::resource('states', \App\Http\Controllers\Admin\StateController::class);
+Route::resource('cities', \App\Http\Controllers\Admin\CityController::class);
