@@ -41,6 +41,9 @@
                                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                                                            value="{{ $category->name }}">
                                                 </div>
+                                                @error('name')
+                                                <span class="text-red-500">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-3 gap-6">

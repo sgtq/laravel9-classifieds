@@ -3,28 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CityStoreRequest;
+use App\Models\City;
+use App\Models\State;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CityController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request): View
     {
-        //
+        $state_id = $request->state_id;
+        $states = State::all();
+        return view('admin.cities.create', compact('states', 'state_id'));
     }
 
     /**
@@ -33,31 +30,26 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CityStoreRequest $request): RedirectResponse
     {
-        //
-    }
+        if ($city = City::create($request->validated())) {
+            return redirect()->route('states.edit', $request->state_id)
+                ->with('message', 'City saved');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return back()->with('message' , 'An error has ocurred when saving City');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  City $city
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(City $city)
     {
-        //
+        $states = State::where('state_id', $city->state->id);
+        return view('admin.cities.edit', compact('city'));
     }
 
     /**

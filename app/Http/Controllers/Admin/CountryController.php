@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CountryStoreRequest;
 use App\Models\Country;
+use App\Models\State;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CountryController extends Controller
 {
@@ -38,8 +41,7 @@ class CountryController extends Controller
      */
     public function store(CountryStoreRequest $request)
     {
-        $validated = $request->validated();
-        if ($country = Country::create($validated)) {
+        if ($country = Country::create($request->validated())) {
             return redirect()->route('countries.edit', $country->id)
                 ->with('message', 'Country created');
         }
@@ -52,10 +54,10 @@ class CountryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  Country $country
-     * @return \Illuminate\Http\Response
      */
     public function edit(Country $country)
     {
+        $country->states = State::where('country_id', $country->id)->get();
         return view('admin.countries.edit', compact('country'));
     }
 
@@ -64,9 +66,9 @@ class CountryController extends Controller
      *
      * @param  App\Http\Requests\CountryStoreRequest  $request
      * @param  Country $country
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response | \Illuminate\Http\RedirectResponse
      */
-    public function update(CountryStoreRequest $request, Country $country)
+    public function update(CountryStoreRequest $request, Country $country): RedirectResponse
     {
         if ($country->update($request->validated())) {
             return back()
@@ -81,7 +83,7 @@ class CountryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Country $country
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response | \Illuminate\Http\RedirectResponse
      */
     public function destroy(Country $country)
     {

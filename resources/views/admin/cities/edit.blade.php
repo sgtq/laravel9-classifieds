@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('New Country') }}
+            {{ __('Edit State') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                     <div class="flex justify-start">
-                        <a href="{{ route('countries.index') }}"
+                        <a href="{{ route('states.index') }}"
                            class="py-2 px-4 m-2 bg-green-500 hover:bg-green-300 text-gray-50 rounded-md">Back</a>
                     </div>
                 </div>
@@ -21,42 +21,43 @@
                     <div class="md:grid md:grid-cols-3 md:gap-6">
                         <div class="md:col-span-1">
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900">Create Category</h3>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Edit State</h3>
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="{{ route('countries.store') }}" method="POST">
+                            <form action="{{ route('cities.update', $state->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                                        <div class="grid grid-cols-3 gap-6">
+                                            <div class="col-span-3 sm:col-span-2">
+                                                <label for="name" class="block text-sm font-medium text-gray-700">
+                                                    Country
+                                                </label>
+                                                <div class="mt-1 flex rounded-md shadow-sm">
+                                                    <select name="state_id" id="state_id">
+                                                        <option value="">Please select one..</option>
+                                                        @foreach ($states as $state)
+                                                        <option value="{{ $state->id }}" {{ $state->id === $city->state_id ? 'selected' : '' }}>{{ $state->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('country_id')
+                                                    <span class="text-red-500">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
                                                 <label for="name" class="block text-sm font-medium text-gray-700">
                                                     Name
                                                 </label>
                                                 <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="text" name="name" id="name"
+                                                    <input type="text" name="name" id="name" value="{{ $city->name }}"
                                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                                                            placeholder="Name">
                                                 </div>
-                                                @error('name')
-                                                <span class="text-red-500">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="col-span-3 sm:col-span-2">
-                                                <label for="name" class="block text-sm font-medium text-gray-700">
-                                                    Code
-                                                </label>
-                                                <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="text" name="country_code" id="country_code"
-                                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                                           placeholder="Country Code">
-                                                </div>
-                                                @error('name')
-                                                <span class="text-red-500">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                         </div>
 
