@@ -72,6 +72,17 @@ class StateController extends Controller
         }
     }
 
+    public function status(int $state_id)
+    {
+        $state = State::find($state_id);
+        $state->is_active = !$state->is_active;
+        if ($state->update()) {
+            return redirect()->back()->with('message', 'Status changed');
+        }
+
+        return redirect()->back()->with('message', 'An error has ocurred when changing the State status');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

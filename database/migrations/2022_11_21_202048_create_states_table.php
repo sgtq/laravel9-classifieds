@@ -17,6 +17,7 @@ class CreateStatesTable extends Migration
             $table->id();
             $table->foreignId('country_id')->constrained();
             $table->string('name');
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

@@ -93,6 +93,10 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Name
                                     </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Active
+                                    </th>
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
@@ -104,6 +108,21 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             {{ $state->name }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <form method="POST"
+                                                  action="{{ route('states.status', $state->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <a class="text-red-500 hover:text-red-900 px-2"
+                                                   href="{{ route('states.status', $state->id) }}"
+                                                   onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                    {{ !$state->is_active ? 'Activate' : 'Deactivate' }}
+                                                </a>
+                                            </form>
                                         </div>
                                     </td>
                                     <td class="flex px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
