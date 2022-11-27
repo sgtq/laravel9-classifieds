@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,4 @@ Route::resource('states', \App\Http\Controllers\Admin\StateController::class);
 Route::put('states/status/{state_id}', [\App\Http\Controllers\Admin\StateController::class, 'status'])->name('states.status');
 Route::resource('cities', \App\Http\Controllers\Admin\CityController::class);
 
-Route::get('listings/create', [\App\Http\Controllers\ListingController::class, 'create'])->name('listings.create');
-Route::post('listings/store', [\App\Http\Controllers\ListingController::class, 'store'])->name('listings.store');
+Route::resource('listings', ListingController::class)->middleware('auth');

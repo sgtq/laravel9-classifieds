@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ListingStoreRequest;
-use App\Models\Category;
-use App\Models\City;
 use App\Models\Condition;
-use App\Models\Country;
 use App\Models\Listing;
-use App\Models\State;
-use App\Models\SubCategory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ListingController extends Controller
 {
+    public function index()
+    {
+        $listings = Listing::where('user_id', auth()->user()->id)->paginate(15);
+        return view('listings.index', compact('listings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,9 +44,10 @@ class ListingController extends Controller
                 $image3_path = $request->file('image3')->store('public/listings');
             }
 
-            $validated = [
+            $listing = Listing::create([
                 'user_id' => auth()->user()->id,
-//                'sub_category_id' => $request->sub_category_id,
+                'category_id' => $request->category_id,
+                'subcategory_id' => $request->subcategory_id,
                 'title' => $request->title,
                 'slug' => Str::slug($request->title),
                 'description' => $request->description,
@@ -59,13 +59,13 @@ class ListingController extends Controller
                 'state_id' => $request->state_id ?: NULL,
                 'city_id' => $request->state_id ?: NULL,
                 'phone' => $request->phone,
-                'published' => $request->published ?? 0,
+//                'is_published' => $request->is_published ?? 0,
                 'image_featured' => $featured_image_path,
                 'image2' => $image2_path ?? NULL,
                 'image3' => $image3_path ?? NULL,
-            ];
+            ]);
 
-            if (Listing::create($validated)) {
+            if ($listing) {
                 return redirect()->route('dashboard')
                     ->with('message', 'Listing saved');
             }
@@ -74,5 +74,10 @@ class ListingController extends Controller
         }
 
         return back()->with('message', 'Please include a featured Image');
+    }
+
+    public function destroy($listing)
+    {
+        //
     }
 }

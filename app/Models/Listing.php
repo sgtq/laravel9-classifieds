@@ -11,6 +11,8 @@ class Listing extends Model
 
     protected $fillable = [
         'user_id',
+        'category_id',
+        'subcategory_id',
         'title',
         'slug',
         'description',
@@ -22,15 +24,20 @@ class Listing extends Model
         'state_id',
         'city_id',
         'phone',
-        'published',
+        'is_published',
         'image_featured',
         'image2',
         'image3',
     ];
 
-    public function subCategories()
+    public function category()
     {
-        return $this->belongsToMany(SubCategory::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
     }
 
     public function user()

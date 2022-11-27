@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            // Category and Subcategory will be hasAndBelongsToMany. No column in this table.
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('subcategory_id');
             $table->string('title');
             $table->string('slug');
             $table->text('description');
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('phone');
-            $table->boolean('published')->default(0);
+            $table->boolean('is_published')->default(0);
             $table->string('image_featured');
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
