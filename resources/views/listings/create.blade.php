@@ -106,6 +106,20 @@
                                         </div>
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
+                                                <label for="phone" class="block text-sm font-medium text-gray-700">
+                                                    Phone
+                                                </label>
+                                                <div class="mt-1 flex rounded-md shadow-sm">
+                                                    <input type="text" name="phone" id="phone"
+                                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
+                                                </div>
+                                                @error('phone')
+                                                <span class="text-red-500">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-6">
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label for="location" class="block text-sm font-medium text-gray-700">
                                                     Location
                                                 </label>
@@ -120,57 +134,7 @@
                                             </div>
                                         </div>
                                         @livewire('dependent-country')
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="col-span-3 sm:col-span-2">
-                                                <label for="phone" class="block text-sm font-medium text-gray-700">
-                                                    Phone
-                                                </label>
-                                                <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="text" name="phone" id="phone"
-                                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
-                                                </div>
-                                                @error('phone')
-                                                <span class="text-red-500">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700">
-                                                Featured Image
-                                            </label>
-                                            <div class="mt-1 flex items-center">
-                                                <input type="file" id="image_featured" name="image_featured"
-                                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
-                                            </div>
-                                            @error('image_featured')
-                                            <span class="text-red-500">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700">
-                                                Image 2
-                                            </label>
-                                            <div class="mt-1 flex items-center">
-                                                <input type="file" id="image2" name="image2"
-                                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
-                                            </div>
-                                            @error('image2')
-                                            <span class="text-red-500">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700">
-                                                Image 3
-                                            </label>
-                                            <div class="mt-1 flex items-center">
-                                                <input type="file" id="image3" name="image3"
-                                                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" />
-                                            </div>
-                                            @error('image3')
-                                            <span class="text-red-500">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                        @livewire('image-preview')
                                         <div class="px-4 py-3 bg-gray-50 sm:px-6">
                                             <button type="submit"
                                                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
