@@ -24,15 +24,8 @@ class ListingController extends Controller
      */
     public function create(): View
     {
-        $sub_categories = SubCategory::all();
         $conditions = Condition::all();
-        $countries = Country::all();
-        $states = State::where('is_active', 1)->select('id', 'name')->get();
-        $cities = City::all();
-
-        return view('listings.create',
-            compact( 'sub_categories', 'conditions', 'countries', 'states', 'cities')
-        );
+        return view('listings.create', compact( 'conditions', ));
     }
 
     /**
