@@ -24,12 +24,11 @@ class ListingStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required'],
+//            'user_id' => ['required'],
             'title' => [
                 'required',
                 'min:10',
             ],
-            'slug',
             'description' => [
                 'required',
                 'min:10',

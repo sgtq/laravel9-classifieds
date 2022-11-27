@@ -26,7 +26,7 @@ class SubcategoryStoreRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'min|3',
+                'min:3',
             ],
             'category_id' => ['required'],
             'image' => ['required']

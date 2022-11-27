@@ -28,11 +28,6 @@ class Listing extends Model
         'image3',
     ];
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
     public function subCategories()
     {
         return $this->belongsToMany(SubCategory::class);

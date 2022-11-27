@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="#" method="POST"
+                            <form action="{{ route('listings.store') }}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -25,37 +25,17 @@
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
                                                 <label for="category" class="block text-sm font-medium text-gray-700">
-                                                    Category
-                                                </label>
-                                                <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <select name="category_id" id="category_id"
-                                                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                                        <option value="">Please select one...</option>
-                                                        @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                @error('category_id')
-                                                <span class="text-red-500">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="col-span-3 sm:col-span-2">
-                                                <label for="category" class="block text-sm font-medium text-gray-700">
                                                     Sub Category
                                                 </label>
                                                 <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <select name="subcategory_id" id="subcategory_id"
+                                                    <select name="subcategory_id" id="subcategory_id" multiple
                                                             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                                        <option value="">Please select one...</option>
                                                         @foreach ($sub_categories as $subCategory)
-                                                            <option value="{{ $subCategory->id }}">{{ $subCategory->category->name.' - '.$subCategory->name }}</option>
+                                                        <option value="{{ $subCategory->id }}">{{ $subCategory->category->name.' - '.$subCategory->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                @error('category_id')
+                                                @error('subcategory_id')
                                                 <span class="text-red-500">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -218,7 +198,7 @@
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
                                                 <label for="phone" class="block text-sm font-medium text-gray-700">
-                                                    City
+                                                    Phone
                                                 </label>
                                                 <div class="mt-1 flex rounded-md shadow-sm">
                                                     <input type="text" name="phone" id="phone"

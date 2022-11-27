@@ -27,8 +27,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('ads/create', [\App\Http\Controllers\ListingController::class, 'create'])->name('ads.create');
-
 // Admin Resources
 Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 Route::resource('subcategories', \App\Http\Controllers\Admin\SubCategoryController::class);
@@ -38,3 +36,6 @@ Route::resource('countries', \App\Http\Controllers\Admin\CountryController::clas
 Route::resource('states', \App\Http\Controllers\Admin\StateController::class);
 Route::put('states/status/{state_id}', [\App\Http\Controllers\Admin\StateController::class, 'status'])->name('states.status');
 Route::resource('cities', \App\Http\Controllers\Admin\CityController::class);
+
+Route::get('listings/create', [\App\Http\Controllers\ListingController::class, 'create'])->name('listings.create');
+Route::post('listings/store', [\App\Http\Controllers\ListingController::class, 'store'])->name('listings.store');

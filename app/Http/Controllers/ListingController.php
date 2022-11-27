@@ -18,23 +18,12 @@ use Illuminate\View\View;
 class ListingController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return View
      */
     public function create(): View
     {
-        $categories = Category::all();
         $sub_categories = SubCategory::all();
         $conditions = Condition::all();
         $countries = Country::all();
@@ -42,7 +31,7 @@ class ListingController extends Controller
         $cities = City::all();
 
         return view('listings.create',
-            compact('categories', 'sub_categories', 'conditions', 'countries', 'states', 'cities')
+            compact( 'sub_categories', 'conditions', 'countries', 'states', 'cities')
         );
     }
 
@@ -52,7 +41,7 @@ class ListingController extends Controller
      * @param  ListingStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ListingStoreRequest $request): RedirectResponse
+    public function store(ListingStoreRequest $request)
     {
         if ($request->hasFile('image_featured')) {
             $featured_image_path = $request->file('image_featured')->store('public/listings');
@@ -63,76 +52,34 @@ class ListingController extends Controller
                 $image3_path = $request->file('image3')->store('public/listings');
             }
 
-            $validated = $request->validated([
+            $validated = [
+                'user_id' => auth()->user()->id,
+//                'sub_category_id' => $request->sub_category_id,
                 'title' => $request->title,
                 'slug' => Str::slug($request->title),
                 'description' => $request->description,
                 'price' => $request->price,
-                'price_negotiable' => $request->price_negotiable,
+                'price_negotiable' => $request->price_negotiable ?? 0,
                 'condition_id' => $request->condition_id,
                 'location' => $request->location,
                 'country_id' => $request->country_id,
                 'state_id' => $request->state_id ?: NULL,
+                'city_id' => $request->state_id ?: NULL,
                 'phone' => $request->phone,
-                'published' => $request->published,
+                'published' => $request->published ?? 0,
                 'image_featured' => $featured_image_path,
                 'image2' => $image2_path ?? NULL,
                 'image3' => $image3_path ?? NULL,
-            ]);
+            ];
 
             if (Listing::create($validated)) {
-                return redirect()->route('listings.index')
+                return redirect()->route('dashboard')
                     ->with('message', 'Listing saved');
             }
 
-            return redirect()->back()->with('message', 'An error has occurred when saving New Listing');
+            return back()->with('message', 'An error has occurred when saving New Listing');
         }
 
-        return redirect()->back()->with('message', 'Please include a featured Image');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Listing $listing)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Listing $listing)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Listing $listing)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Listing $listing)
-    {
-        //
+        return back()->with('message', 'Please include a featured Image');
     }
 }
