@@ -24,21 +24,11 @@ class Listing extends Model
         'state_id',
         'city_id',
         'phone',
-        'is_published',
+        'published',
         'image_featured',
         'image2',
         'image3',
     ];
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function subCategory()
-    {
-        return $this->belongsTo(SubCategory::class);
-    }
 
     public function user()
     {

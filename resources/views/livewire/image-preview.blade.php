@@ -3,7 +3,13 @@
         <label class="block text-sm font-medium text-gray-700">
             Featured Image
         </label>
-        <div class="mt-1 flex items-center">
+        <div class="mt-1 w-full flex items-center">
+            @if ($featuredImage_old)
+            <div class="m-2 p-2">
+                Old Featured Photo:
+                <img src="{{ Storage::url($featuredImage_old) }}" width="80" height="80" />
+            </div>
+            @endif
             @if ($featuredImage)
             <div class="m-2 p-2">
                 <img src="{{ $featuredImage->temporaryUrl() }}" width="80" height="80" />
@@ -21,6 +27,12 @@
             Image 2
         </label>
         <div class="mt-1 flex items-center">
+            @if ($image2_old)
+            <div class="m-2 p-2">
+                Old photo 2:
+                <img src="{{ Storage::url($image2_old) }}" width="80" height="80" />
+            </div>
+            @endif
             @if ($image2)
             <div class="m-2 p-2">
                 <img src="{{ $image2->temporaryUrl() }}" width="80" height="80" />
@@ -38,6 +50,12 @@
             Image 3
         </label>
         <div class="mt-1 flex items-center">
+            @if ($image3_old)
+            <div class="m-2 p-2">
+                Old photo 3:
+                <img src="{{ Storage::url($image3_old) }}" width="80" height="80" />
+            </div>
+            @endif
             @if ($image3)
             <div class="m-2 p-2">
                 <img src="{{ $image3->temporaryUrl() }}" width="80" height="80" />

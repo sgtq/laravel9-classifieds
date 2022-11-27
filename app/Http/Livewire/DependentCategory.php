@@ -16,15 +16,19 @@ class DependentCategory extends Component
     public $selectedCategory = null;
     public $selectedSubCategory = null;
 
-    public function mount()
+    public function mount($selectedCategory = null, $selectedSubCategory = null)
     {
         $this->categories = Category::all();
+        $this->selectedCategory = $selectedCategory;
+        $this->selectedSubCategory = $selectedSubCategory;
+
+        $this->updatedSelectedCategory();
     }
 
-    public function updatedSelectedCategory($category)
+    public function updatedSelectedCategory()
     {
         if (!is_null($this->selectedCategory)) {
-            $this->subCategories = SubCategory::where('category_id', $category)->get();
+            $this->subCategories = SubCategory::where('category_id', $this->selectedCategory)->get();
         }
     }
 

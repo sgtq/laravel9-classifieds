@@ -1,5 +1,5 @@
 <div>
-    <div class="col-span-6 sm:col-span-6">
+    <div class="col-span-3 sm:col-span-6">
         <label for="category" class="block text-sm font-medium text-gray-700">
             Category
         </label>
@@ -8,7 +8,9 @@
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                 <option value="">Please select..</option>
                 @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }} >
+                    {{ $category->name }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -17,7 +19,7 @@
         @enderror
     </div>
     @if (!is_null($selectedCategory))
-    <div class="col-span-6 sm:col-span-6">
+    <div class="col-span-3 sm:col-span-6">
         <label for="category" class="block text-sm font-medium text-gray-700">
             Sub Category
         </label>
@@ -26,7 +28,11 @@
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                 <option value="">Please select..</option>
                 @foreach ($subCategories as $subCategory)
-                <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                <option value="{{ $subCategory->id }}"
+                    {{ $selectedSubCategory == $subCategory->id ? 'selected' : '' }}
+                >
+                    {{ $subCategory->name }}
+                </option>
                 @endforeach
             </select>
         </div>

@@ -15,23 +15,37 @@ class DependentCountry extends Component
 
     public $selectedCountry = null;
     public $selectedState = null;
+    public $selectedCity = null;
 
-    public function mount()
+    public function mount($country_id = null, $state_id = null, $city_id = null)
     {
         $this->countries = Country::all();
+
+        // According to docs, these should be assigned if the key is sent as param from blade, but it does not work
+        $this->selectedCountry = $country_id;
+        $this->selectedState = $state_id;
+        $this->selectedCity = $city_id;
+        //
+
+        $this->updatedSelectedCountry(); // call it for edit case. Create case will have null
     }
 
-    public function updatedSelectedCountry($country_id)
+    public function updatedSelectedCountry()
     {
         if (!is_null($this->selectedCountry)) {
-            $this->states = State::where(['country_id' => $country_id, 'is_active' => 1])->get();
+            $this->states = State::where(['country_id' => $this->selectedCountry, 'is_active' => 1])->get();
+            $this->updatedSelectedState(); // call it for edit case. Create case will have null
+        } else {
+            $this->reset(['selectedState', 'selectedCity', 'cities']);
         }
     }
 
-    public function updatedSelectedState($state_id)
+    public function updatedSelectedState()
     {
         if (!is_null($this->selectedState)) {
-            $this->cities = City::where('state_id', $state_id)->get();
+            $this->cities = City::where('state_id', $this->selectedState)->get();
+        } else {
+            $this->reset(['selectedCity', 'cities']);
         }
     }
 

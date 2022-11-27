@@ -24,7 +24,6 @@ class ListingStoreRequest extends FormRequest
     public function rules()
     {
         return [
-//            'user_id' => ['required'],
             'category_id' => ['required'],
             'title' => [
                 'required',

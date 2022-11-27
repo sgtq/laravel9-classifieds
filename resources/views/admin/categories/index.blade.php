@@ -73,12 +73,14 @@
                                         </div>
                                     </td>
                                     <td class="flex px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <!--@php/*
                                         <a href="{{ route('admin.add_sub', $category->id) }}"
                                            class="text-indigo-600 hover:text-indigo-900 px-2">Add SubCategory</a>
+                                        */@endphp -->
                                         <a href="{{ route('categories.edit', $category->id) }}"
                                            class="text-indigo-600 hover:text-indigo-900 px-2">Edit</a>
                                         <form method="POST"
-                                              action="{{ route('admin.categories.destroy', $category->id) }}">
+                                              action="{{ route('categories.destroy', $category->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <a class="text-red-500 hover:text-red-900 px-2"

@@ -51,9 +51,7 @@ class CategoryController extends Controller
 
             return redirect()->route('categories.index')->with('success', 'Category created');
         }
-
-        $this->banner('warning', 'Please select a file');
-        return back()->with('warning', 'Please select a file');
+        return back()->with('message', 'Please select a file');
     }
 
     /**
@@ -105,8 +103,7 @@ class CategoryController extends Controller
             ]);
         }
 
-        $this->banner('success', 'Category updated successfully');
-        return redirect()->route('categories.index')->with('success', 'Category updated');
+        return redirect()->route('categories.index')->with('message', 'Category updated');
     }
 
     /**
@@ -119,6 +116,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted');
+        return redirect()->route('categories.index')->with('message', 'Category deleted');
     }
 }

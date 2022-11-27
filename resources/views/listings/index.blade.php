@@ -51,18 +51,17 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Location
                                     </th>
-                                    <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($listings as $listing)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            {{ $listing->title }}
-                                        </div>
+                                        <a href="{{ route('listings.edit', $listing->id) }}">
+                                            <div class="flex items-center">
+                                                {{ $listing->title }}
+                                            </div>
+                                        </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -89,19 +88,6 @@
                                         <div class="flex items-center">
                                             {{ $listing->location }}
                                         </div>
-                                    </td>
-                                    <td class="flex px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <form method="POST"
-                                              action="{{ route('listings.destroy', $listing->id) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a class="text-red-500 hover:text-red-900 px-2"
-                                               href="{{ route('listings.destroy', $listing->id) }}"
-                                               onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                                Delete
-                                            </a>
-                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

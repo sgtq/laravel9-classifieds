@@ -1,6 +1,6 @@
-<div class="grid grid-cols-12 gap-6">
-    <div class="grid grid-cols-6 gap-6">
-        <div class="col-span-3 sm:col-span-2">
+<div>
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-3 sm:col-span-6">
             <label for="country_id" class="block text-sm font-medium text-gray-700">
                 Country
             </label>
@@ -19,8 +19,8 @@
         </div>
     </div>
     @if (!is_null($selectedCountry))
-    <div class="grid grid-cols-6 gap-6">
-        <div class="col-span-3 sm:col-span-2">
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-3 sm:col-span-6">
             <label for="state_id" class="block text-sm font-medium text-gray-700">
                 State
             </label>
@@ -40,13 +40,13 @@
     </div>
     @endif
     @if (!is_null($selectedState))
-    <div class="grid grid-cols-6 gap-6">
-        <div class="col-span-3 sm:col-span-2">
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-3 sm:col-span-6">
             <label for="city_id" class="block text-sm font-medium text-gray-700">
                 City
             </label>
             <div class="mt-1 flex rounded-md shadow-sm">
-                <select name="city_id"
+                <select wire:model="selectedCity" name="city_id" id="city_id"
                         class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
                     <option value="">Please select one...</option>
                     @foreach ($cities as $city)
