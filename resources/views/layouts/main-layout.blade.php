@@ -38,5 +38,31 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script type="text/javascript">
+            function filterResults() {
+                let href = 'all-listings?';
+                var title = document.getElementById('title').value;
+                var country = document.getElementById('country').value;
+                var category = document.getElementById('category').value;
+                var maxPrice = document.getElementById('maxPrice').value;
+
+                if (title.length) {
+                    href += '&filter[title]=' + title;
+                }
+                if (country.length) {
+                    href += '&filter[country]=' + country;
+                }
+                if (category.length) {
+                    href += '&filter[category]=' + category;
+                }
+                if (maxPrice.length) {
+                    href += '&filter[price]=' + maxPrice;
+                }
+
+                document.location.href = href;
+            }
+            document.getElementById('filter').addEventListener('click', filterResults);
+        </script>
     </body>
 </html>

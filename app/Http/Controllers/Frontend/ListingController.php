@@ -17,8 +17,9 @@ class ListingController extends Controller
         $listings = QueryBuilder::for(Listing::class)
             ->allowedFilters([
                 'title',
-                AllowedFilter::exact('country_id'),
-                AllowedFilter::exact('category_id')
+                AllowedFilter::exact('country', 'country_id'),
+                AllowedFilter::exact('category', 'category_id'),
+                AllowedFilter::scope('price', 'max_price'),
             ])->get();
 
         return view('frontend.all-listings', compact('listings'));

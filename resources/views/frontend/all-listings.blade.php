@@ -30,24 +30,3 @@
     </section>
     <x-main-footer />
 </x-main-layout>
-<script type="text/javascript">
-    function filterResults() {
-        let href = 'all-listings?';
-        var title = document.getElementById('title').value;
-        var country = document.getElementById('country').value;
-        var category = document.getElementById('category').value;
-
-        if (title.length) {
-            href += '&filter[title]=' + title;
-        }
-        if (country.length) {
-            href += '&filter[country_id]=' + country;
-        }
-        if (category.length) {
-            href += '&filter[category_id]=' + category;
-        }
-
-        document.location.href = href;
-    }
-    document.getElementById('filter').addEventListener('click', filterResults);
-</script>

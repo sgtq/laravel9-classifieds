@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,11 +41,6 @@ class Listing extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function subCategory()
-    {
-        return $this->belongsTo(SubCategory::class);
-    }
-
     public function condition()
     {
         return $this->belongsTo(Condition::class);
@@ -63,5 +59,10 @@ class Listing extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function scopeMaxPrice(Builder $query, int $max_price): Builder
+    {
+        return $query->where('price', '<=', $max_price);
     }
 }
