@@ -6,6 +6,7 @@ use App\Http\Requests\ListingStoreRequest;
 use App\Models\Condition;
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -13,7 +14,12 @@ class ListingController extends Controller
 {
     public function index()
     {
-        $listings = Listing::where('user_id', auth()->user()->id)->paginate(15);
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('super-admin')) {
+            $listings = Listing::paginate(15);
+        } else {
+            $listings = Listing::where('user_id', auth()->user()->id)->paginate(15);
+        }
+
         return view('listings.index', compact('listings'));
     }
 
@@ -127,8 +133,16 @@ class ListingController extends Controller
         return back()->with('message', 'An error has occurred when saving New Listing');
     }
 
-    public function destroy($listing)
+    public function destroy(Listing $listing)
     {
-        //
+        Storage::delete($listing->image_featured);
+        if ($listing->image2) {
+            Storage::delete($listing->image2);
+        }
+        if ($listing->image3) {
+            Storage::delete($listing->image3);
+        }
+        $listing->delete();
+        return redirect()->route('listings.index')->with('Listing deleted');
     }
 }
