@@ -18,6 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/all-listings', [\App\Http\Controllers\Frontend\ListingController::class, 'index'])
+    ->name('all-listings');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

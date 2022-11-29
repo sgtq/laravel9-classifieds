@@ -9,8 +9,8 @@
             <span class="ml-3 text-xl">{{ config('app.name', 'Laravel') }}</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900">Home</a>
-            <a class="mr-5 hover:text-gray-900">All ads</a>
+            <a class="mr-5 hover:text-gray-900" href="#">Home</a>
+            <a class="mr-5 hover:text-gray-900" href="{{ route('all-listings') }}">All ads</a>
             <a class="mr-5 hover:text-gray-900">Stores</a>
             <a class="mr-5 hover:text-gray-900">Contact</a>
             @guest
