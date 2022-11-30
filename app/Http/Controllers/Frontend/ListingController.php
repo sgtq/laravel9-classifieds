@@ -20,8 +20,13 @@ class ListingController extends Controller
                 AllowedFilter::exact('country', 'country_id'),
                 AllowedFilter::exact('category', 'category_id'),
                 AllowedFilter::scope('price', 'max_price'),
-            ])->get();
+            ])->paginate(12);
 
         return view('frontend.all-listings', compact('listings'));
+    }
+
+    public function welcome()
+    {
+        return view('welcome');
     }
 }

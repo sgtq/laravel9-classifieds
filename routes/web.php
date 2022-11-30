@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Frontend\ListingController::class, 'welcome'])->name('welcome');
 
 Route::get('/all-listings', [\App\Http\Controllers\Frontend\ListingController::class, 'index'])
     ->name('all-listings');

@@ -26,6 +26,9 @@
                     @endforeach
                 </div>
             </div>
+            <div class="p-2 m-2">
+                {{ $listings->links() }}
+            </div>
         </section>
     </section>
     <x-main-footer />

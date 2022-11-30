@@ -2,10 +2,13 @@
 
 namespace App\View\Components;
 
+use App\Models\Listing;
 use Illuminate\View\Component;
 
 class MainFeatured extends Component
 {
+    public $featured_ads;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,8 @@ class MainFeatured extends Component
      */
     public function __construct()
     {
-        //
+        //$this->featured_ads = Listing::where('is_featured', 1)->get();
+        $this->featured_ads = Listing::inRandomOrder()->limit(6)->get();
     }
 
     /**
