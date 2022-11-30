@@ -9,16 +9,15 @@
             <span class="ml-3 text-xl">{{ config('app.name', 'Laravel') }}</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900" href="#">Home</a>
+            <a class="mr-5 hover:text-gray-900" href="/">Home</a>
             <a class="mr-5 hover:text-gray-900" href="{{ route('all-listings') }}">All ads</a>
-            <a class="mr-5 hover:text-gray-900">Stores</a>
             <a class="mr-5 hover:text-gray-900">Contact</a>
             @guest
             <a href="{{ route('login') }}" class="mr-5 hover:text-gray-900">Log In</a>
             <a href="{{ route('register') }}" class="mr-5 hover:text-gray-900">Register</a>
             @endguest
             @auth
-            <a class="mr-5 hover:text-gray-900">{{ auth()->user()->name }}</a>
+            <a class="mr-5 hover:text-gray-900" href="{{ route('dashboard') }}">{{ auth()->user()->name }}</a>
             @endauth
         </nav>
         <button class="inline-flex items-center bg-green-500 border-0 py-1 px-3 focus:outline-none hover:bg-green-200 rounded text-base text-gray-500 font-semibold mt-4 md:mt-0">

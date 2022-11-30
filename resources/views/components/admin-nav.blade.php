@@ -1,14 +1,12 @@
 <nav :class="{'block': open, 'hidden': !open}" class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
     <x-app-link href="{{ route('listings.create') }}" :active="request()->routeIs('listings.create')" class="bg-green-500 hover:bg-green-700">New Listing</x-app-link>
     <x-app-link href="{{ route('listings.index') }}" :active="request()->routeIs('listings.index')">My Listings</x-app-link>
-    @hasrole('admin')
     <x-app-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">Dashboard</x-app-link>
     <x-app-link href="{{ route('childcategories.index') }}" :active="request()->routeIs('childcategories.index')">Child Categories</x-app-link>
     <x-app-link href="{{ route('subcategories.index') }}" :active="request()->routeIs('subcategories.index')">SubCategories</x-app-link>
     <x-app-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">Categories</x-app-link>
     <x-app-link href="{{ route('countries.index') }}" :active="request()->routeIs('countries.index')">Countries</x-app-link>
     <x-app-link href="{{ route('conditions.index') }}" :active="request()->routeIs('conditions.index')">Conditions</x-app-link>
-    @endhasrole
     <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <span>{{ auth()->user()->name }}</span>
